@@ -126,8 +126,8 @@ public class Task1 {
         }
         //dop3+
         quantitySymbolInRow = 0;
-        for (int i = 0; i < SIZE-1 ; i++) {
-           // System.out.println("{"+(i)+"}{"+( i+1)+"}");
+        for (int i = 0; i < SIZE - 1; i++) {
+            // System.out.println("{"+(i)+"}{"+( i+1)+"}");
             if (map[i][i + 1] == symbol) {
                 quantitySymbolInRow++;
             } else if (quantitySymbolInRow > 0) {
@@ -140,8 +140,8 @@ public class Task1 {
         //dop4
         quantitySymbolInRow = 0;
         for (int i = 0; i < SIZE - 1; i++) {
-       // System.out.println("{"+(i+1)+"}{"+(i)+"}");
-            if (map[i+1][i] == symbol) {
+            // System.out.println("{"+(i+1)+"}{"+(i)+"}");
+            if (map[i + 1][i] == symbol) {
                 quantitySymbolInRow++;
             } else if (quantitySymbolInRow > 0) {
                 quantitySymbolInRow = 0;
@@ -163,10 +163,31 @@ public class Task1 {
         }
         return true;
     }
+/*  уж очень просится единый метод для диагоналей) не успел отрефакторить
+    тогда вопрос, если бы я хотел передавать в метод разные map[][]
+    map[i + 1][i]...map[i + 1][SIZE - i - 1] итд, как это можно было бы реализовать?
+    напрягло что map внутри цикла for, который уже содержит переменную i
+    не хотелось бы городить ифовую фабрику внутри))
+ */
+  /*  private static boolean diagonalCheck(int size, char maps[][],char symbol) {
+        int quantitySymbolInRow = 0;
+        for (int i = 0; i < size; i++) {
+            if (maps[][] == symbol){
+                quantitySymbolInRow++;
+            } else if (quantitySymbolInRow > 0) {
+                quantitySymbolInRow = 0;
+            }
+            if (quantitySymbolInRow == DOTS_TO_WIN) {
+                return true;
+            }
+        }
+        return false;
+    }*/
 
     private static void aiTurn() {
         int x, y;
         do {
+            //для блокирования нужно прогонять метод check To Win для DOTS_TO_WIN-1 клеток и если есть isCellValid, то блокировать)
             x = new Random().nextInt(SIZE);
             y = new Random().nextInt(SIZE);
         } while (!isCellValid(x, y));
@@ -176,7 +197,7 @@ public class Task1 {
     private static void humanTurn() {
         int x, y;
         do {
-            System.out.println("Введите коордаты");
+            System.out.println("Введите координаты");
             System.out.println("Введите X");
             x = scanner.nextInt() - 1;
             System.out.println("Введите Y");
@@ -185,7 +206,7 @@ public class Task1 {
         map[x][y] = DOT_X;
     }
 
-    private static boolean isCellValid(int x, int y) {//true если условие валидно, т.е. мы можем поставить символ в эту ячейку, false в иных случаях
+    private static boolean isCellValid(int x, int y) {
         return x >= 0 && x < SIZE && y >= 0 && y < SIZE && map[x][y] == DOT_EMPTY;
     }
 
