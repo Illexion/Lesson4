@@ -46,10 +46,10 @@ public class Task1 {
 
     private static boolean checkWin(char symbol) {
         //что в строке есть нужное количество символов подряд
-        for (char[] row : map) {
+        for (int j = 0; j < SIZE; j++) {
             int quantitySymbolInRow = 0;
             for (int i = 0; i < SIZE; i++) {
-                if (row[i] == symbol) {
+                if (map[j][i] == symbol) {
                     quantitySymbolInRow++;
                 } else if (quantitySymbolInRow > 0) {
                     quantitySymbolInRow = 0;
@@ -98,10 +98,11 @@ public class Task1 {
                 return true;
             }
         }
-        //dop1
+        //dop1+
         quantitySymbolInRow = 0;
         for (int i = 0; i < SIZE - 1; i++) {
-            if (map[i][SIZE - i - 1] == symbol) {
+            // System.out.println("{"+(i)+"}{"+(SIZE - i-2)+"}");
+            if (map[i][SIZE - i - 2] == symbol) {
                 quantitySymbolInRow++;
             } else if (quantitySymbolInRow > 0) {
                 quantitySymbolInRow = 0;
@@ -110,10 +111,11 @@ public class Task1 {
                 return true;
             }
         }
-        //dop2
+        //dop2+
         quantitySymbolInRow = 0;
-        for (int i = 0; i < (SIZE+1 ); i++) {
-            if (map[i + 1][SIZE - i] == symbol) {
+        for (int i = 0; i < (SIZE - 1); i++) {
+            //   System.out.println("{"+(i+1)+"}{"+(SIZE - i-1)+"}");
+            if (map[i + 1][SIZE - i - 1] == symbol) {
                 quantitySymbolInRow++;
             } else if (quantitySymbolInRow > 0) {
                 quantitySymbolInRow = 0;
@@ -122,10 +124,11 @@ public class Task1 {
                 return true;
             }
         }
-        //dop3
-        /*quantitySymbolInRow = 0;
-        for (int i = 0; i < SIZE - 2; i++) {
-            if (map[i][i - 1] == symbol) {
+        //dop3+
+        quantitySymbolInRow = 0;
+        for (int i = 0; i < SIZE-1 ; i++) {
+           // System.out.println("{"+(i)+"}{"+( i+1)+"}");
+            if (map[i][i + 1] == symbol) {
                 quantitySymbolInRow++;
             } else if (quantitySymbolInRow > 0) {
                 quantitySymbolInRow = 0;
@@ -137,7 +140,8 @@ public class Task1 {
         //dop4
         quantitySymbolInRow = 0;
         for (int i = 0; i < SIZE - 1; i++) {
-            if (map[i][i + 1] == symbol) {
+       // System.out.println("{"+(i+1)+"}{"+(i)+"}");
+            if (map[i+1][i] == symbol) {
                 quantitySymbolInRow++;
             } else if (quantitySymbolInRow > 0) {
                 quantitySymbolInRow = 0;
@@ -145,7 +149,7 @@ public class Task1 {
             if (quantitySymbolInRow == DOTS_TO_WIN) {
                 return true;
             }
-        }*/
+        }
         return false;
     }
 
