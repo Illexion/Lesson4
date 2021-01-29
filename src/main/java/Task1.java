@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Task1 {
 
     public static char[][] map;
-    public static final int SIZE = 3;
-    public static final int DOTS_TO_WIN = 3;
+    public static final int SIZE = 5;
+    public static final int DOTS_TO_WIN = 4;
 
     public static final char DOT_EMPTY = '•';
     public static final char DOT_X = 'X';
@@ -74,6 +74,7 @@ public class Task1 {
             }
         }
         //что в диагоналях есть нужное количество символов подряд
+        // main1
         int quantitySymbolInRow = 0;
         for (int i = 0; i < SIZE; i++) {
             if (map[i][i] == symbol) {
@@ -85,6 +86,7 @@ public class Task1 {
                 return true;
             }
         }
+        // main2
         quantitySymbolInRow = 0;
         for (int i = 0; i < SIZE; i++) {
             if (map[i][SIZE - i - 1] == symbol) {
@@ -96,6 +98,54 @@ public class Task1 {
                 return true;
             }
         }
+        //dop1
+        quantitySymbolInRow = 0;
+        for (int i = 0; i < SIZE - 1; i++) {
+            if (map[i][SIZE - i - 1] == symbol) {
+                quantitySymbolInRow++;
+            } else if (quantitySymbolInRow > 0) {
+                quantitySymbolInRow = 0;
+            }
+            if (quantitySymbolInRow == DOTS_TO_WIN) {
+                return true;
+            }
+        }
+        //dop2
+        quantitySymbolInRow = 0;
+        for (int i = 0; i < (SIZE+1 ); i++) {
+            if (map[i + 1][SIZE - i] == symbol) {
+                quantitySymbolInRow++;
+            } else if (quantitySymbolInRow > 0) {
+                quantitySymbolInRow = 0;
+            }
+            if (quantitySymbolInRow == DOTS_TO_WIN) {
+                return true;
+            }
+        }
+        //dop3
+        /*quantitySymbolInRow = 0;
+        for (int i = 0; i < SIZE - 2; i++) {
+            if (map[i][i - 1] == symbol) {
+                quantitySymbolInRow++;
+            } else if (quantitySymbolInRow > 0) {
+                quantitySymbolInRow = 0;
+            }
+            if (quantitySymbolInRow == DOTS_TO_WIN) {
+                return true;
+            }
+        }
+        //dop4
+        quantitySymbolInRow = 0;
+        for (int i = 0; i < SIZE - 1; i++) {
+            if (map[i][i + 1] == symbol) {
+                quantitySymbolInRow++;
+            } else if (quantitySymbolInRow > 0) {
+                quantitySymbolInRow = 0;
+            }
+            if (quantitySymbolInRow == DOTS_TO_WIN) {
+                return true;
+            }
+        }*/
         return false;
     }
 
